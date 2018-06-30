@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<title>Twitter API with Javascript/Node/Express</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<!-- Bootstrap -->
+		<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	</head>
+	<body class="home" ng-controller="myCtrl">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-xs-12">
+					<h1 class="text-center">Music for Twits</h1>
+				</div>
+			</div>
+
+			<!-- get twitter tones -->
+			<div class="row" style="margin-top:50px;">
+				<div class="col-xs-12">
+					<input class="form-control" type="text" placeholder="Twitter User Name (e.g. halloumi_mane)" ng-model="userName">
+					<br>
+					<br>
+					<p class="text-center"><button class="btn btn-primary" ng-click="getUser(userName)">Get Tweet</button></p>
+				</div>
+			</div>
+
+			<!-- get url tones -->
+			<div class="row" style="margin-top:50px;">
+				<div class="col-xs-12">
+					<input class="form-control" type="text" placeholder="http://www.nytimes.com" ng-model="url">
+					<br>
+					<br>
+					<p class="text-center"><button class="btn btn-primary" ng-click="getUrlTones(url)">Get Url Tones</button></p>
+				</div>
+			</div>
+
+			<div ng-repeat-start="sentenceTones in currentTone.result.tone.sentences_tone">
+				<b>Sentence {{sentenceTones.sentence_id}}:</b>
+				<div ng-repeat="tone in sentenceTones.tones">
+					{{tone.tone_name}}
+				</div>
+			</div>
+
+			<!-- ERRORS -->
+			<div ng-repeat-end class="row" ng-if="twitterErrors">
+				<div class="col-xs-12">
+					<div class="alert alert-danger">
+						{{twitterErrors}}
+					</div>
+				</div>
+			</div>
+
+			<div class="row" style="margin-top:50px;" ng-if="results">
+				<div class="col-xs-12">
+
+					<p>{{currentTweet}}</p>
+
+					<p>{{currentTone}}</p>
+
+				</div>
+			</div>
+
+
+		</div>
+
+		<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+		<script src="/wad.min.js"></script>
+
+		<script src="/app.js"></script>
+	</body>
+</html>
